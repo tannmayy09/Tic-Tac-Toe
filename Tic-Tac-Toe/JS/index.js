@@ -3,26 +3,41 @@ let board = [
     [-1, -1, -1],
     [-1, -1, -1]
   ];
+let count = 0;
+var inc=0;
 
 function wiz(clickedId){
     cId = clickedId;
     let a = clickCount();
     if(a%2 === 0){
+        gameStatus.innerHTML ="player O, make your move";
         writeX(cId);
     } else{
+        gameStatus.innerHTML ="player X, make your move";
         writeO(cId);
     }
     if(a>=5){
         if(checkWinner()==1){
-            alert("X wins");
+            alert("Game Over");
+            document.getElementById('board').style.pointerEvents = 'none';
+            gameStatus.innerHTML = "Player X wins!!";
+
         }
         if(checkWinner()==0){
-            alert("O wins");
+            alert("Game Over");
+            document.getElementById('board').style.pointerEvents = 'none';
+            gameStatus.innerHTML = "Player O wins!!";
+        }
+        else{
+            count++;
+            if(count>4){
+                alert("Game Over");
+                gameStatus.innerHTML = "Draw!!";
+            }
         }
     }
 }
 
-var inc=0;
 function clickCount() {
    inc=inc+1;
    return inc;    
@@ -59,7 +74,6 @@ function checkWinner(){
         return board[2][2];
     }
 }
-
 
 function writeO(cId){
     switch (cId) {
